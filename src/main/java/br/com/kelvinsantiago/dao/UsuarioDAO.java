@@ -41,15 +41,14 @@ public class UsuarioDAO {
         }
     }
 
-    public Boolean remover(Usuario usuario){
+    public Boolean remover(long cpf){
         EntityManager manager = FactoryEntityManager.getEntityManagerFactory().createEntityManager();
         try{
 
             manager.getTransaction().begin();
-            Usuario usuariobuscado = manager.find(Usuario.class, usuario.getCpf());
+            Usuario usuariobuscado = manager.find(Usuario.class, cpf);
             manager.remove(usuariobuscado);
             manager.getTransaction().commit();
-            System.out.println("Removendo usuario");
             return true;
 
         }catch (Exception e){
@@ -59,15 +58,15 @@ public class UsuarioDAO {
         }
     }
 
-    public Usuario buscar(Usuario usuario){
+    public Usuario buscarPelaMatricula(long cpf){
         EntityManager manager = FactoryEntityManager.getEntityManagerFactory().createEntityManager();
         try{
             manager.getTransaction().begin();
-            Usuario usuariobuscado = manager.find(Usuario.class, usuario.getCpf());
+            Usuario usuariobuscado = manager.find(Usuario.class, cpf);
             return usuariobuscado;
 
         }catch (Exception e){
-            return usuario;
+            return null;
         }finally {
             manager.close();
         }

@@ -1,17 +1,17 @@
 package br.com.kelvinsantiago.controller;
 
-
 import br.com.kelvinsantiago.dao.UsuarioDAO;
 import br.com.kelvinsantiago.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.ArrayList;
+import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
 
 @RestController
-@RequestMapping("/usuario")
 public class UsuarioController {
 
     private UsuarioDAO usuarioDAO;
@@ -22,20 +22,88 @@ public class UsuarioController {
     }
 
 
-    @RequestMapping(value = "/{name}", produces = "application/json; charset=UTF-8")
-    public @ResponseBody String digaBoasVindas(@PathVariable String name) {
-        String result = "O serviço " + name + " não existe";
-        return result;
+    /*
+     * Retornando uma lista com todos usuarios cadastrados
+     */
+    @RequestMapping(value = "/usuario/", method = RequestMethod.GET)
+    public ResponseEntity<List<Usuario>> getTodosUsuarios() {
+
+        List<Usuario> usuarios = usuarioDAO.getTodosUsuarios();
+
+        if(usuarios.isEmpty()){
+            return new ResponseEntity<List<Usuario>>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<Usuario>>(usuarios, HttpStatus.OK);
     }
 
+    /*
+     * Retornando um usuario específico cadastrado
+     */
+    @RequestMapping(value = "/usuario/{cpf}", method = RequestMethod.GET)
+    public ResponseEntity<Usuario> getUsuario(@PathVariable("cpf") long cpf) {
 
-    @RequestMapping(value = "listausuarios", produces = "application/json; charset=UTF-8")
-    public @ResponseBody List<Usuario> getListaUsuarios() {
-        List<Usuario> usuarioslista = new ArrayList<Usuario>();
+        System.out.println("Procurando usuario com CPF: " + cpf);
 
-        usuarioslista = usuarioDAO.getTodosUsuarios();
+        Usuario usuario = usuarioDAO.buscarPelaMatricula(cpf);
 
-        return usuarioslista;
+        if (usuario == null) {
+            System.out.println("Usuario com CPF:  " + cpf + " não encontrado.");
+            return new ResponseEntity<Usuario>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
+    }
+
+    /*
+     * Adicionando usuario
+     */
+    @RequestMapping(value = "/usuario/", method = RequestMethod.POST)
+    public ResponseEntity<Void> adicionarUsuario(@RequestBody Usuario usuario, UriComponentsBuilder ucBuilder) {
+        System.out.println("Criando usuario: " + usuario.getNome());
+
+        if (usuarioDAO.buscarPelaMatricula(usuario.getCpf()) != null) {
+            System.out.println("O CPF " + usuario.getCpf() + " já está cadastrado.");
+            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+        }
+
+        usuarioDAO.adicionar(usuario);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(ucBuilder.path("/usuario/{cpf}").buildAndExpand(usuario.getCpf()).toUri());
+        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+    }
+
+    /*
+     *  Atualizando usuario cadastrado
+     */
+    @RequestMapping(value = "/usuario/{cpf}", method = RequestMethod.PUT)
+    public ResponseEntity<Usuario> updateUser(@PathVariable("cpf") long cpf, @RequestBody Usuario usuario) {
+        System.out.println("Atualizando Usuario de CPF " + cpf);
+
+        Usuario usuarioPesquisado = usuarioDAO.buscarPelaMatricula(cpf);
+
+        if (usuarioPesquisado == null) {
+            System.out.println("Usuario com CPF: " + cpf + " não encontrado");
+            return new ResponseEntity<Usuario>(HttpStatus.NOT_FOUND);
+        }
+        usuarioDAO.editar(usuario);
+        return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
+    }
+
+    /*
+     * Removendo usuario
+     */
+    @RequestMapping(value = "/usuario/{cpf}", method = RequestMethod.DELETE)
+    public ResponseEntity<Usuario> deleteUser(@PathVariable("cpf") long cpf) {
+        System.out.println("Procurando usuario com CPF: " + cpf);
+
+        Usuario usuario = usuarioDAO.buscarPelaMatricula(cpf);
+        if (usuario == null) {
+            System.out.println("Usuario com CPF " + cpf + " não encontrado");
+            return new ResponseEntity<Usuario>(HttpStatus.NOT_FOUND);
+        }
+
+        usuarioDAO.remover(cpf);
+        return new ResponseEntity<Usuario>(HttpStatus.OK);
     }
 
     @RequestMapping(value = "/painel")
@@ -58,7 +126,7 @@ public class UsuarioController {
 
     @RequestMapping(value = "remover")
     public String removerUsuario(@ModelAttribute Usuario usuario){
-        usuarioDAO.remover(usuario);
+        usuarioDAO.remover(usuario.getCpf());
         return "forward:/usuario/painel";
     }
 
