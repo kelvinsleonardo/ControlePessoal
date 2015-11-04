@@ -2,11 +2,7 @@ package br.com.kelvinsantiago.model;
 
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @NamedQueries({
@@ -57,4 +53,5 @@ public class Usuario implements Serializable {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
+
 }

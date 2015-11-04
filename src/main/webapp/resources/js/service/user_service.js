@@ -30,7 +30,7 @@ App.factory('ServicoUsuario', ['$http', '$q', function($http, $q){
             );
         },
 
-        editarUsuario: function(usuario, cpf){
+        editarUsuario: function(cpf, usuario){
             return $http.put('http://localhost:9090/ControlePessoal/usuario/'+cpf, usuario)
                 .then(
                 function(resposta){
