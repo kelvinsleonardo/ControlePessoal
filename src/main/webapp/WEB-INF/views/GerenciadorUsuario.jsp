@@ -15,20 +15,12 @@
 
     <form ng-submit="controlador.enviar()" name="formUsuario">
 
-
-        <a ng-click="createNewUser()" class="btn btn-small btn-primary">create new user</a>
-
-        <input type="hidden" ng-model="controlador.usuario.cpf" />
-
-
-
-        <!--
-        <label >CPF:</label>
-        <input type="number" ng-model="controlador.usuario.cpf" placeholder="CPF"/>
+        <label>CPF</label>
+        <input type="text" ng-model="controlador.usuario.cpf" placeholder="CPF"/>
         <br>
-        -->
 
-        <label >NOME:</label>
+
+        <label>NOME:</label>
         <input type="text" ng-model="controlador.usuario.nome" placeholder="Nome"/>
         <br>
 
@@ -40,8 +32,8 @@
         <input type="text" ng-model="controlador.usuario.telefone" name="telefone" placeholder="Telefone" />
 
 
-        <br>
         <input type="submit"  ng-disabled="formUsuario.$invalid" value="{{!controlador.usuario.cpf ? 'Adicionar' : 'Atualizar'}}" >
+        <input type="submit"  ng-click="controlador.disableClick(1)" ng-disabled="formUsuario.$invalid" value="Atualizar">
         <button type="button" ng-click="controlador.resetarFormulario()"  ng-disabled="formUsuario.$pristine">Limpar Formulário</button>
         <br><br><br>
 
@@ -74,6 +66,9 @@
                         <button type="button" ng-click="controlador.remover(usu.cpf)">Remove</button>
                     </td>
                 </tr>
+
+                <li><a href="NovoUsuario">Novo Teste</a></li>
+
                 </tbody>
             </table>
         </div>
@@ -82,7 +77,9 @@
 
 
 
+
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+<script src="https://code.angularjs.org/1.4.4/angular-route.js"></script>
 <script src="<c:url value='/resources/js/app.js' />"></script>
 <script src="<c:url value='/resources/js/service/user_service.js' />"></script>
 <script src="<c:url value='/resources/js/controller/user_controller.js' />"></script>

@@ -98,8 +98,6 @@ App.controller('ControladorUsuario', ['$scope', 'ServicoUsuario', function($scop
     };
 
 
-    $scope.createNewUser = function () {
-        $location.path('/user-creation');
-    };
+
 
 }]);
