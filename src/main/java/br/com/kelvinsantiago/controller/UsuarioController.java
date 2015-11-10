@@ -25,7 +25,7 @@ public class UsuarioController {
     /*
      * Retornando uma lista com todos usuarios cadastrados
      */
-    @RequestMapping(value = "/usuario/", method = RequestMethod.GET)
+    @RequestMapping(value = "/usuario", method = RequestMethod.GET)
     public ResponseEntity<List<Usuario>> getTodosUsuarios() {
 
         List<Usuario> usuarios = usuarioDAO.getTodosUsuarios();
@@ -56,7 +56,7 @@ public class UsuarioController {
     /*
      * Adicionando usuario
      */
-    @RequestMapping(value = "/usuario/", method = RequestMethod.POST)
+    @RequestMapping(value = "/usuario", method = RequestMethod.POST)
     public ResponseEntity<Void> adicionarUsuario(@RequestBody Usuario usuario, UriComponentsBuilder ucBuilder) {
         System.out.println("Criando usuario: " + usuario.getNome());
 
