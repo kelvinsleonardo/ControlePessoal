@@ -74,9 +74,16 @@ public class UsuarioDAO {
 
     public ArrayList<Usuario> getTodosUsuarios(){
         EntityManager manager = FactoryEntityManager.getEntityManagerFactory().createEntityManager();
-        TypedQuery<Usuario> typedQuery = manager.createNamedQuery("Usuario.buscarTodosUsuarios", Usuario.class);
-        ArrayList<Usuario> usuarios = (ArrayList<Usuario>) typedQuery.getResultList();
-        return usuarios;
+        try{
+            TypedQuery<Usuario> typedQuery = manager.createNamedQuery("Usuario.buscarTodosUsuarios", Usuario.class);
+            ArrayList<Usuario> usuarios = (ArrayList<Usuario>) typedQuery.getResultList();
+            return usuarios;
+
+        }catch (Exception e){
+            return null;
+        }finally {
+            manager.close();
+        }
     }
 
 }

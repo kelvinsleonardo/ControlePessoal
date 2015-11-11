@@ -7,23 +7,19 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
 
 @RestController
 public class UsuarioController {
 
+    @Autowired
     private UsuarioDAO usuarioDAO;
 
-    @Autowired
-    public UsuarioController (UsuarioDAO usuarioDAO){
-        this.usuarioDAO = usuarioDAO;
-    }
-
-
-    /*
-     * Retornando uma lista com todos usuarios cadastrados
+    /**
+     * Responsável por retornar JSON com todos os usuarios.
+     * @author Kélvin Santiago
+     * @return ResponseEntity<Usuario>
      */
     @RequestMapping(value = "/usuario", method = RequestMethod.GET)
     public ResponseEntity<List<Usuario>> getTodosUsuarios() {
@@ -36,8 +32,11 @@ public class UsuarioController {
         return new ResponseEntity<List<Usuario>>(usuarios, HttpStatus.OK);
     }
 
-    /*
-     * Retornando um usuario específico cadastrado
+    /**
+     * Responsável por retornar JSON, de acordo com o cpf informado.
+     * @author Kélvin Santiago
+     * @param cpf
+     * @return ResponseEntity<Usuario>
      */
     @RequestMapping(value = "/usuario/{cpf}", method = RequestMethod.GET)
     public ResponseEntity<Usuario> getUsuario(@PathVariable("cpf") long cpf) {
@@ -53,11 +52,16 @@ public class UsuarioController {
         return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
     }
 
-    /*
-     * Adicionando usuario
+    /**
+     * Responsável por adicionar um novo usuario JSON.
+     * @author Kélvin Santiago
+     * @param usuario
+     * @param ucBuilder
+     * @return ResponseEntity<Usuario>
      */
     @RequestMapping(value = "/usuario", method = RequestMethod.POST)
     public ResponseEntity<Void> adicionarUsuario(@RequestBody Usuario usuario, UriComponentsBuilder ucBuilder) {
+
         System.out.println("Criando usuario: " + usuario.getNome());
 
         if (usuarioDAO.buscarPelaMatricula(usuario.getCpf()) != null) {
@@ -72,11 +76,16 @@ public class UsuarioController {
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 
-    /*
-     *  Atualizando usuario cadastrado
+    /**
+     * Responsável por atualizar um usuario.
+     * @author Kélvin Santiago
+     * @param cpf
+     * @param usuario
+     * @return ResponseEntity<Usuario>
      */
     @RequestMapping(value = "/usuario/{cpf}", method = RequestMethod.PUT)
     public ResponseEntity<Usuario> updateUser(@PathVariable("cpf") long cpf, @RequestBody Usuario usuario) {
+
         System.out.println("Atualizando Usuario de CPF " + cpf);
 
         Usuario usuarioPesquisado = usuarioDAO.buscarPelaMatricula(cpf);
@@ -89,8 +98,11 @@ public class UsuarioController {
         return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
     }
 
-    /*
-     * Removendo usuario
+    /**
+     * Responsável por atualizar um usuario.
+     * @author Kélvin Santiago
+     * @param cpf
+     * @return ResponseEntity<Usuario>
      */
     @RequestMapping(value = "/usuario/{cpf}", method = RequestMethod.DELETE)
     public ResponseEntity<Usuario> deleteUser(@PathVariable("cpf") long cpf) {
@@ -106,28 +118,18 @@ public class UsuarioController {
         return new ResponseEntity<Usuario>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/painel")
-    public ModelAndView initUsuario(){
-        ModelAndView mv = new ModelAndView("index");
-        mv.addObject("listadeusuarios", usuarioDAO.getTodosUsuarios());
-        return mv;
-    }
-
-    @RequestMapping(value = "/")
+    /**
+     * Retorna Mensagem Methods.
+     * @author Kélvin Santiago
+     * @return String
+     */
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String initIndex(){
-        return "index";
-    }
-
-    @RequestMapping(value = "adicionar")
-    public String adicionarUsuario(@ModelAttribute Usuario usuario){
-        usuarioDAO.adicionar(usuario);
-        return "forward:/usuario/painel";
-    }
-
-    @RequestMapping(value = "remover")
-    public String removerUsuario(@ModelAttribute Usuario usuario){
-        usuarioDAO.remover(usuario.getCpf());
-        return "forward:/usuario/painel";
+        return  "Buscar Todos - GET /usuario <br>" +
+                "Buscar Especifico - GET /usuario/{cpf}<br>" +
+                "Adicionar Novo - POST /usuario/<br>" +
+                "Atualizar - PUT /usuario/{cpf}<br>" +
+                "Deletar - DELETE /usuario/{cpf}<br>";
     }
 
 }
