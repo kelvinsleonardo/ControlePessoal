@@ -5,6 +5,7 @@ import br.com.kelvinsantiago.model.Usuario;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 
@@ -30,7 +31,7 @@ public class UsuarioDAO {
         EntityManager manager = FactoryEntityManager.getEntityManagerFactory().createEntityManager();
         try{
             manager.getTransaction().begin();
-            Usuario usuariobuscado = manager.find(Usuario.class, usuario.getCpf());
+            Usuario usuariobuscado = manager.find(Usuario.class, usuario.getId());
             manager.merge(usuario);
             manager.getTransaction().commit();
             return true;
@@ -41,12 +42,12 @@ public class UsuarioDAO {
         }
     }
 
-    public Boolean remover(long cpf){
+    public Boolean remover(long id){
         EntityManager manager = FactoryEntityManager.getEntityManagerFactory().createEntityManager();
         try{
 
             manager.getTransaction().begin();
-            Usuario usuariobuscado = manager.find(Usuario.class, cpf);
+            Usuario usuariobuscado = manager.find(Usuario.class, id);
             manager.remove(usuariobuscado);
             manager.getTransaction().commit();
             return true;
@@ -58,12 +59,14 @@ public class UsuarioDAO {
         }
     }
 
-    public Usuario buscarPelaMatricula(long cpf){
+    public Usuario buscarPeloCPF(String cpf){
         EntityManager manager = FactoryEntityManager.getEntityManagerFactory().createEntityManager();
         try{
             manager.getTransaction().begin();
-            Usuario usuariobuscado = manager.find(Usuario.class, cpf);
-            return usuariobuscado;
+            TypedQuery<Usuario> typedQuery = manager.createNamedQuery("Usuario.buscarPeloCPF", Usuario.class);
+            typedQuery.setParameter("cpf", cpf);
+            Usuario usuario = typedQuery.getSingleResult();
+            return usuario;
 
         }catch (Exception e){
             return null;
@@ -85,5 +88,4 @@ public class UsuarioDAO {
             manager.close();
         }
     }
-
 }
