@@ -76,8 +76,11 @@ public class UsuarioController {
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 
-    /*
-     *  Atualizando usuario cadastrado
+    /**
+     * Responsável por atualizar um usuario JSON.
+     * @author Kélvin Santiago
+     * @param usuario
+     * @return ResponseEntity<Usuario>
      */
     @RequestMapping(value = "/usuario/{cpf}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Usuario> atualizarUsuario(@PathVariable("cpf") String cpf, @RequestBody Usuario usuario) {
@@ -94,8 +97,11 @@ public class UsuarioController {
         return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
     }
 
-    /*
-     * Removendo usuario
+    /**
+     * Responsável por remover usuario JSON.
+     * @author Kélvin Santiago
+     * @param cpf
+     * @return ResponseEntity<Usuario>
      */
     @RequestMapping(value = "/usuario/{cpf}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Usuario> deletarUsuario(@PathVariable("cpf") String cpf) {
@@ -111,6 +117,11 @@ public class UsuarioController {
         return new ResponseEntity<Usuario>(HttpStatus.OK);
     }
 
+    /**
+     * Responsável por retornar uma String com informações dos métodos de acesso ao acessar o path "/"
+     * @author Kélvin Santiago
+     * @return ResponseEntity<Usuario>
+     */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String initIndex(){
         return  "Buscar Todos - GET /usuario <br>" +

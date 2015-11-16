@@ -24,6 +24,7 @@ public class UsuarioDAO {
             return false;
         }finally{
             manager.close();
+
         }
     }
 
