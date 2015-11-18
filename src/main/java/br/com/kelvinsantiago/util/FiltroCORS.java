@@ -12,6 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * Classe responsável em permitir requisições cross-origin para o serviço Rest , que são
+ * realizadas em domínios diferentes.
+ * @author Kélvin Santiago
+ */
 @Component
 public class FiltroCORS implements Filter {
 

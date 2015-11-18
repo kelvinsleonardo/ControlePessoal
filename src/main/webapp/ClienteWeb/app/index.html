@@ -1,0 +1,36 @@
+<html>
+<head>
+    <meta charset="UTF-8">  
+    <title>Gerenciador de Usuarios</title>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bower_components/sweetalert/dist/sweetalert.css" rel="stylesheet">
+    <link href="resources/css/estilo.css" rel="stylesheet">
+</head>
+    
+<body ng-app="appUsuario">
+    
+<div class="content" ng-view></div>
+
+<footer>
+        <br><br>
+     <div class="rodape">
+        © 2015 Copyright Kelvin Santiago - <a href="http://www.kelvinsantiago.com.br" target="_blank">www.kelvinsantiago.com.br</a>
+     </div>       
+</footer>
+
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>    
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/sweetalert/dist/sweetalert.min.js"></script> 
+    
+<script src="resources/js/app.js"></script>
+<script src="resources/js/service/UsuarioServico.js"></script>
+<script src="resources/js/DiretivaUsuario.js"></script>
+<script src="resources/js/controller/UsuarioController.js"></script>
+
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+   
+
+</body>
+</html>

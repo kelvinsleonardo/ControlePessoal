@@ -1,0 +1,51 @@
+<div class="panel panel-info">
+        <div class="panel-heading">
+            <span class="leads">
+                <h4><strong>PAINEL DE USUÁRIOS</strong></h4>
+            </span>
+        </div>
+        <div class="tablecontainer">
+            <table class="table table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th>CPF</th>
+                    <th>Nome</th>
+                    <th>Endereço</th>
+                    <th>Telefone</th>
+                    <th>Editar</th>
+                    <th>Remover</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="usu in usuarios">
+                    <td><span ng-bind="usu.cpf"></span></td>
+                    <td><span ng-bind="usu.nome"></span></td>
+                    <td><span ng-bind="usu.endereco"></span></td>
+                    <td><span ng-bind="usu.telefone"></span></td>
+                    <td>
+                        <div class="text-center">
+                            <a class="btn btn-warning" href="#/{{usu.cpf}}/Editar">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                <strong></strong>
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-center">
+                        <button class="btn btn-danger" type="button" ng-click="removerUsuario(usu.cpf)">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            <strong></strong>
+                        </button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>           
+        </div> 
+    </div>
+            <div>
+                <a class="btn btn-info" href="#NovoUsuario"> 
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                <strong>Adicionar Novo Usuário </strong>
+                </a><br><br>
+            </div>

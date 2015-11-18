@@ -1,0 +1,59 @@
+<div class="container">
+  <h1 class="text-color">
+      <strong>Adicionar Novo Usuário</strong>
+  </h1>
+ 
+     <form name="formAdicionar" ng-submit="formAdicionar.$valid && adicionarUsuario()" novalidate>
+         
+         <!-- Input CPF -->
+        <div ng-class="{ 'has-error has-feedback form-group ' : formAdicionar.cpf.$error.cpfValido && !formAdicionar.cpf.$pristine,
+                         'form-group has-success has-feedback' :formAdicionar.cpf.$valid  }">
+          <label class="control-label">CPF*</label>
+          <input name="cpf" class="form-control" type="text" ng-model="usuario.cpf" ng-required="true" cpf-valido onlynumbers/>
+          <span ng-show="formAdicionar.cpf.$error.cpfValido && !formAdicionar.cpf.$pristine" class="glyphicon glyphicon-remove form-control-feedback"></span>
+          <span ng-show="formAdicionar.cpf.$valid" class="glyphicon glyphicon-ok form-control-feedback"</span>
+        </div>
+         
+         <!-- Input NOME -->
+        <div ng-class="{'has-error has-feedback form-group ' : formAdicionar.nome.$invalid
+                        && !formAdicionar.nome.$pristine, 
+                       'form-group has-success has-feedback' :formAdicionar.nome.$valid  }">
+          <label class="control-label">Nome*</label>
+          <input name="nome" class="form-control" type="text" ng-model="usuario.nome" ng-required="true" uppercase/>
+          <span ng-show="formAdicionar.nome.$invalid && !formAdicionar.nome.$pristine" class="glyphicon glyphicon-remove form-control-feedback"></span>
+          <span ng-show="formAdicionar.nome.$valid" class="glyphicon glyphicon-ok form-control-feedback"</span>
+        </div>
+         
+        <!-- Input TELEFONE -->
+        <div ng-class="{ 'has-error has-feedback form-group ' : formAdicionar.telefone.$invalid
+                         && !formAdicionar.telefone.$pristine, 
+                         'form-group has-success has-feedback' :formAdicionar.telefone.$valid  }">
+          <label class="control-label">Telefone*</label>
+          <input name="telefone" class="form-control" type="text" ng-model="usuario.telefone" ng-required="true" onlynumbers/>
+          <span ng-show="formAdicionar.telefone.$invalid && !formAdicionar.telefone.$pristine" class="glyphicon glyphicon-remove form-control-feedback"></span>
+          <span ng-show="formAdicionar.telefone.$valid" class="glyphicon glyphicon-ok form-control-feedback"</span>
+        </div>
+         
+          <!-- Input ENDERECO -->
+        <div ng-class="{'form-group has-success has-feedback' : formAdicionar.endereco.$valid && !formAdicionar.endereco.$pristine  }">
+          <label class="control-label" >Endereço</label>
+          <textarea name="endereco" class="form-control"  ng-model="usuario.endereco"/></textarea>
+          <span ng-show="formAdicionar.endereco.$valid && !formAdicionar.endereco.$pristine" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+        </div>
+    
+        <div><h5>* Campos obrigatórios</h5>
+        <button type="submit" class="btn btn-success" ng-class="{'disabled btn-success' : formAdicionar.$invalid , 'btn-success' : formAdicionar.$valid}">
+            <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span> 
+            <strong>Salvar</strong>
+        </button>
+        <button type="button" class="btn btn-primary" ng-click="irParaHome()">
+            <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+            <strong>Voltar ao Painel</strong>
+        </button>
+        </div>
+        <br>
+       
+    
+      </form>
+
+    </div>

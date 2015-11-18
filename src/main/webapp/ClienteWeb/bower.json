@@ -1,0 +1,26 @@
+{
+  "name": "ClienteWeb",
+  "authors": [
+    "Kélvin Santiago <kelvinsleonardo@gmail.com>"
+  ],
+  "description": "Sistema Controle",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "http://www.kelvinsantiago.com.br",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "jquery": "~2.1.4",
+    "angular": "~1.4.7",
+    "angular-resource": "~1.4.7",
+    "angular-route": "~1.4.7",
+    "sweetalert": "~1.1.3"
+  }
+}

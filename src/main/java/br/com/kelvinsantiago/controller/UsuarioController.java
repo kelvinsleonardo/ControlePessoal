@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
 
+/**
+ * Classe responsável em fornecer o serviço webservice Rest
+ */
 @RestController
 public class UsuarioController {
 

@@ -1,0 +1,25 @@
+.ng-invalid.ng-dirty{
+    border-color:red;
+}
+ 
+.ng-valid.ng-dirty{
+    border-color:green;
+}
+
+.content { 
+    padding: 20px; 
+    box-sizing: border-box;
+}
+
+.rodape {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 50px;
+    width: 100%;
+    color:#FFFFFF; 
+    background: #06303A;
+    font-size: 15px;
+    text-align: center;
+    line-height:50px;
+}

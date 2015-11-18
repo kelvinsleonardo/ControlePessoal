@@ -4,12 +4,12 @@ import br.com.kelvinsantiago.factory.FactoryEntityManager;
 import br.com.kelvinsantiago.model.Usuario;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 import java.util.ArrayList;
 
-
+/**
+ * Classe DAO (Data Access Object) responsável por fazer a interação com a camada de persistencia JPA
+ */
 @Repository
 public class UsuarioDAO {
 
@@ -63,7 +63,7 @@ public class UsuarioDAO {
     public Usuario buscarPeloCPF(String cpf){
         EntityManager manager = FactoryEntityManager.getEntityManagerFactory().createEntityManager();
         try{
-            manager.getTransaction().begin();
+            //manager.getTransaction().begin();
             TypedQuery<Usuario> typedQuery = manager.createNamedQuery("Usuario.buscarPeloCPF", Usuario.class);
             typedQuery.setParameter("cpf", cpf);
             Usuario usuario = typedQuery.getSingleResult();
@@ -86,7 +86,7 @@ public class UsuarioDAO {
         }catch (Exception e){
             return null;
         }finally {
-            manager.close();
+           manager.close();
         }
     }
 }

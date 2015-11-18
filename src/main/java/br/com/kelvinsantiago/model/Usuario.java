@@ -10,6 +10,10 @@ import java.io.Serializable;
         query="SELECT user FROM Usuario user WHERE user.cpf LIKE :cpf")
 })
 
+/**
+ * Classe Model (Bean) que representa uma entidade.
+ * @author Kelvin Santiago
+ */
 @Entity
 @Table(name = "tb_usuario")
 public class Usuario implements Serializable {
