@@ -47,9 +47,9 @@ O sistema se adapta ao browser do usuário sem precisar definir diversas folhas 
   * Acesse o sistema: http://localhost/ClienteWeb/app/
 
 #### Screenshots
-![Cliente AngularJS](http://imgur.com/Pd77m2b)
-![Cliente AngularJS](http://imgur.com/SGLseBD)
-![Cliente AngularJS](http://imgur.com/f1m7a3d)
-![Cliente AngularJS](http://imgur.com/hNjjDkz)
+![Cliente AngularJS](http://i.imgur.com/Pd77m2b.png)
+![Cliente AngularJS](http://i.imgur.com/SGLseBD.png)
+![Cliente AngularJS](http://i.imgur.com/f1m7a3d.png)
+![Cliente AngularJS](http://i.imgur.com/hNjjDkz.png)
 
 
