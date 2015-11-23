@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 
 /**
- * Classe DAO (Data Access Object) responsável por fazer a interação com a camada de persistencia JPA
+ * Classe DAO (Data Access Object) responsável por fazer a interqação com a camada de persistencia JPA
  */
 @Repository
 public class UsuarioDAO {

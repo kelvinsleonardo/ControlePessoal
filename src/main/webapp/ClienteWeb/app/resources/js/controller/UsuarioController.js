@@ -141,7 +141,7 @@ App.controller('UsuarioController',
     // Função de redirecionamento para Home (Painel Usuário)
     $scope.irParaHome = function(){
         $location.path("/");
-        $window.location.reload(true);
+        //$window.location.reload(true);
     }
     
     // Funcão para imprimir dados do usuário (toString)

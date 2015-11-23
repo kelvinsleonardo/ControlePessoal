@@ -29,6 +29,11 @@
         </init-param>
     </filter>
 
+    <filter-mapping>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
     <filter>
         <filter-name>FiltroCORS</filter-name>
         <filter-class>br.com.kelvinsantiago.util.FiltroCORS</filter-class>
@@ -39,10 +44,6 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-    <filter-mapping>
-        <filter-name>CharacterEncodingFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
 
     <servlet>
         <servlet-name>springmvc</servlet-name>
